@@ -3,19 +3,18 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
 const reqCheck = require("./api/middleware/requestCheck")
 const cors = require("cors");
-const path = require("path");
 const testRoute = require("./api/routes/testRoute");
-const router = express.Router();
 app.use(cors());
 
 
-
+/**
+* Middleware for setting session configuration
+*/
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -34,12 +33,9 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
 
-const responseFunction = (req, res) => {
-    res.status(200).json({
-        message: 'success'
-    })
-}
-
+/**
+* API Endpoints
+*/
 app.use("/pub/proxy", reqCheck, testRoute);
 app.use("/api/proxy", reqCheck, testRoute);
 
