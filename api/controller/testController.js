@@ -25,6 +25,7 @@ exports.postData = (req, res) => {
  @params res {Object}
  @returns res {Object}
 */
+
 exports.getData = (req, res) => {
     fs.readFile(`${req.params.id}.json`, 'utf8', function (err, data) {
         console.log(data)
