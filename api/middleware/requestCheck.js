@@ -1,5 +1,11 @@
+
+/**
+ Middleware function to check if session or not
+ @params req {Object}
+ @params res {Object}
+ @returns res {Object}| next() {function}
+*/
 module.exports = (req, res, next) => {
-    console.log(req.session, req.sessionID, req.baseUrl);
     if (req.session && req.sessionID) {
         next()
     } else {
